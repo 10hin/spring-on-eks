@@ -1,0 +1,59 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: spring
+  region: ap-northeast-1
+  tags:
+    Purpose: SpringOnEKS
+
+iam:
+  withOIDC: true
+  serviceAccounts:
+    - metadata:
+        name: bucket-lister
+        namespace: default
+      attachPolicy:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - "s3:ListBuckets"
+            Resource:
+              - "*"
+      tags:
+        Purpose: SpringOnEKS
+    - metadata:
+        name: ec2-lister
+        namespace: default
+      attachPolicy:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - "ec2:DescribeInstances"
+            Resource:
+              - "*"
+      tags:
+        Purpose: SpringOnEKS
+    - metadata:
+        name: builder
+        namespace: default
+      wellKnownPolicies:
+        imageBuilder: true
+      tags:
+        Purpose: SpringOnEKS
+
+managedNodeGroups:
+  - name: ng
+    amiFamily: AmazonLinux2
+    instanceType: t3.medium
+    desiredCapacity: 1
+    volumeSize: 20
+    iam:
+      attachPolicyARNs:
+        - "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+        - "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+        - "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+    tags:
+      Purpose: SpringOnEKS
