@@ -3,13 +3,15 @@ FROM public.ecr.aws/docker/library/maven:3-eclipse-temurin-11-alpine AS build
 COPY ./pom.xml ./
 
 RUN mvn initialize \
-    ; mvn dependency:tree \
+    && mvn dependency:tree \
     ;
 
-COPY  ./src ./src
+COPY ./src ./src
 
-RUN mvn package \
-    ; cp ./target/spring-on-eks-*.jar /spring-on-eks.jar
+RUN find \
+    && mvn package \
+    && cp ./target/spring-on-eks-*.jar /spring-on-eks.jar \
+    ;
 
 
 FROM public.ecr.aws/docker/library/eclipse-temurin:11-jre-alpine AS runtime
