@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring
+  template:
+    metadata:
+      labels:
+        app: spring
+    spec:
+      containers:
+      - name: app
+        image: 129008548655.dkr.ecr.ap-northeast-1.amazonaws.com/github.com/10hin/spring-on-eks:latest
+        command:
+        - sh
+        - -c
+        - |
+          while true
+          do
+            sleep 3600s
+          done

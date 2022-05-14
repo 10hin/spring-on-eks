@@ -32,4 +32,15 @@ public class IndexController {
         final GetCallerIdentityResult res = this.sts.getCallerIdentity(req);
         return Mono.just(res);
     }
+
+//    @GetMapping("instances")
+//    public Flux<String> listInstances() {
+//        return null;  // TODO implement
+//    }
+//
+//    @GetMapping("buckets")
+//    public Flux<String> listBuckets() {
+//        return null;  // TODO implement
+//    }
+
 }

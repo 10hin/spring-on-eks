@@ -16,7 +16,7 @@ spec:
           set -euvx
 
           /kaniko/executor \
-            --context=git://github.com/10hin/spring-on-eks/#59d0d984a0875bc998b24fd69cbce4b829891833 \
+            --context=git://github.com/10hin/spring-on-eks/#0ff9c6cb60c3f906596f50b112c0b40b827da915 \
             --dockerfile=package/Dockerfile \
             --destination=129008548655.dkr.ecr.ap-northeast-1.amazonaws.com/github.com/10hin/spring-on-eks:latest \
             ;
