@@ -6,7 +6,7 @@ RUN mvn initialize \
     ; mvn dependency:tree \
     ;
 
-COPY  ./src ./
+COPY  ./src ./src
 
 RUN mvn package \
     ; cp ./target/spring-on-eks-*.jar /spring-on-eks.jar

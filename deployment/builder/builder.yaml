@@ -16,9 +16,10 @@ spec:
           set -euvx
 
           /kaniko/executor \
-            --context=git://github.com/10hin/spring-on-eks/#main \
+            --context=git://github.com/10hin/spring-on-eks/#59d0d984a0875bc998b24fd69cbce4b829891833 \
             --dockerfile=package/Dockerfile \
             --destination=129008548655.dkr.ecr.ap-northeast-1.amazonaws.com/github.com/10hin/spring-on-eks:latest \
             ;
       restartPolicy: Never
+      serviceAccountName: builder
   backoffLimit: 3
